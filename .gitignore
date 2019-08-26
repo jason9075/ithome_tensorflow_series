@@ -1,0 +1,40 @@
+# OS generated files #
+######################
+.DS_Store
+ehthumbs.db
+Icon
+Thumbs.db
+.tmtags
+.idea
+tags
+vendor.tags
+tmtagsHistory
+*.sublime-project
+*.sublime-workspace
+.bundle
+
+*.log
+.vscode/
+
+test.py
+build/
+dist/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# node
+node_modules/
+
+
+*.egg-info/
+
+
+.tox
+
+lib_unique/__pycache__/
+lib_unique/v2/__pycache__/
+__pycache__/
