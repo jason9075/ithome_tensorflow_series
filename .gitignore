@@ -38,3 +38,8 @@ node_modules/
 lib_unique/__pycache__/
 lib_unique/v2/__pycache__/
 __pycache__/
+
+
+# tfevents
+events/*
+!events/.keep
