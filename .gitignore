@@ -43,3 +43,7 @@ __pycache__/
 # tfevents
 events/*
 !events/.keep
+
+# ckpt
+ckpt/*
+!ckpt/.keep
