@@ -47,3 +47,7 @@ events/*
 # ckpt
 ckpt/*
 !ckpt/.keep
+
+# pb
+pb/*
+!pb/.keep
