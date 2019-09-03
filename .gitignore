@@ -51,3 +51,7 @@ ckpt/*
 # pb
 pb/*
 !pb/.keep
+
+# tfrecord
+tfrecord/*
+!tfrecord/.keep
