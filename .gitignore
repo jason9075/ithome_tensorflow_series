@@ -55,3 +55,7 @@ pb/*
 # tfrecord
 tfrecord/*
 !tfrecord/.keep
+
+# day13 output
+13/img/*
+!13/img/.keep
