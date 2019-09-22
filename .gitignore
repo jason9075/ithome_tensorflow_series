@@ -59,3 +59,7 @@ tfrecord/*
 # day13 output
 13/img/*
 !13/img/.keep
+
+# day22 dataset
+22/dataset/*
+!22/dataset/.keep
