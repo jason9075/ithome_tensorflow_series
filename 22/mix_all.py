@@ -16,9 +16,15 @@ BATCH_SIZE = 32
 def main():
     # Build Model #
     global_step = tf.train.get_or_create_global_step()
-    input_node = tf.placeholder(shape=[None, 128, 128, 3], dtype=tf.float32, name='input_node')
-    training_node = tf.placeholder_with_default(True, shape=(), name='training')
-    labels = tf.placeholder(shape=[None], dtype=tf.int64, name='img_labels')
+    input_node = tf.placeholder(shape=[None, 128, 128, 3],
+                                dtype=tf.float32,
+                                name='input_node')
+    training_node = tf.placeholder_with_default(True,
+                                                shape=(),
+                                                name='training')
+    labels = tf.placeholder(shape=[None],
+                            dtype=tf.int64,
+                            name='img_labels')
 
     with tf.variable_scope('backend'):
         net = tf.layers.conv2d(input_node, 32, (3, 3),
@@ -29,7 +35,9 @@ def main():
         net = tf.layers.batch_normalization(net,
                                             training=training_node,
                                             name='bn_1')
-        net = tf.layers.max_pooling2d(net, (2, 2), strides=(2, 2), name='max_pool_1')  # 64
+        net = tf.layers.max_pooling2d(net, (2, 2),
+                                      strides=(2, 2),
+                                      name='max_pool_1')  # 64
 
         net = tf.layers.conv2d(net, 64, (3, 3),
                                activation=tf.nn.relu6,
@@ -39,8 +47,12 @@ def main():
         net = tf.layers.batch_normalization(net,
                                             training=training_node,
                                             name='bn_2')
-        net = tf.layers.dropout(net, 0.1, training=training_node, name='dropout_2')
-        net = tf.layers.max_pooling2d(net, (2, 2), strides=(2, 2), name='max_pool_2')  # 32
+        net = tf.layers.dropout(net, 0.1,
+                                training=training_node,
+                                name='dropout_2')
+        net = tf.layers.max_pooling2d(net, (2, 2),
+                                      strides=(2, 2),
+                                      name='max_pool_2')  # 32
 
         net = tf.layers.conv2d(net, 128, (3, 3),
                                activation=tf.nn.relu6,
@@ -50,11 +62,15 @@ def main():
         net = tf.layers.batch_normalization(net,
                                             training=training_node,
                                             name='bn_3')
-        net = tf.layers.max_pooling2d(net, (2, 2), strides=(2, 2), name='max_pool_3')  # 8
+        net = tf.layers.max_pooling2d(net, (2, 2),
+                                      strides=(2, 2),
+                                      name='max_pool_3')  # 8
 
     net = tf.reshape(net, [-1, 8 * 8 * 128], name='flatten')
-    logit = tf.layers.dense(net, 3, use_bias=False, kernel_initializer=WEIGHT_INIT,
-                            kernel_regularizer=REGULARIZER, name='final_dense')
+    logit = tf.layers.dense(net, 3, use_bias=False,
+                            kernel_initializer=WEIGHT_INIT,
+                            kernel_regularizer=REGULARIZER,
+                            name='final_dense')
 
     lr = tf.train.piecewise_constant(global_step,
                                      boundaries=[250, 500, 750],
@@ -139,13 +155,16 @@ def main():
                         break
 
                     _, total_loss_val, train_acc_val, current_step = \
-                        sess.run([train_op, total_loss, acc_op, global_step], feed_dict={input_node: images_train,
-                                                                                         labels: labels_train})
+                        sess.run([train_op, total_loss, acc_op, global_step],
+                                 feed_dict={input_node: images_train,
+                                            labels: labels_train})
+
                     print('step: %d, total_lost: %.2f, train_acc_val: %.2f' %
                           (current_step, total_loss_val, train_acc_val))
 
                     if current_step % 20 == 0:
-                        test_acc = eval_acc(sess, test_iterator, next_test_element, logit, input_node, labels, training_node)
+                        test_acc = eval_acc(sess, test_iterator, next_test_element, logit,
+                                            input_node, labels, training_node)
                         summary_op_val = \
                             sess.run(summary_op, feed_dict={input_node: images_train,
                                                             labels: labels_train,
