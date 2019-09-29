@@ -10,8 +10,7 @@ REGULARIZER = tf.contrib.layers.l2_regularizer(0.1)
 
 
 def main(opt_type):
-    global_step = tf.get_variable(name="global_step", shape=(), initializer=tf.constant_initializer(0),
-                                  dtype=tf.int32, trainable=False)
+    global_step = tf.train.get_or_create_global_step()
 
     x = tf.placeholder(shape=[None, 2], dtype=tf.float32, name='x')
     y = tf.placeholder(shape=[None], dtype=tf.int32, name='y')
