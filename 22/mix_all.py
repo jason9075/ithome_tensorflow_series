@@ -28,25 +28,25 @@ def main():
 
     with tf.variable_scope('backend'):
         net = tf.layers.conv2d(input_node, 32, (3, 3),
-                               activation=tf.nn.relu6,
                                strides=(1, 1),
                                padding='same',
                                name='conv_1')
         net = tf.layers.batch_normalization(net,
                                             training=training_node,
                                             name='bn_1')
+        net = tf.nn.relu6(net, name='relu_1')
         net = tf.layers.max_pooling2d(net, (2, 2),
                                       strides=(2, 2),
                                       name='max_pool_1')  # 64
 
         net = tf.layers.conv2d(net, 64, (3, 3),
-                               activation=tf.nn.relu6,
                                strides=(1, 1),
                                padding='same',
                                name='conv_2')
         net = tf.layers.batch_normalization(net,
                                             training=training_node,
                                             name='bn_2')
+        net = tf.nn.relu6(net, name='relu_2')
         net = tf.layers.dropout(net, 0.1,
                                 training=training_node,
                                 name='dropout_2')
@@ -55,13 +55,13 @@ def main():
                                       name='max_pool_2')  # 32
 
         net = tf.layers.conv2d(net, 128, (3, 3),
-                               activation=tf.nn.relu6,
                                strides=(2, 2),
                                padding='same',
                                name='conv_3')  # 16
         net = tf.layers.batch_normalization(net,
                                             training=training_node,
                                             name='bn_3')
+        net = tf.nn.relu6(net, name='relu_3')
         net = tf.layers.max_pooling2d(net, (2, 2),
                                       strides=(2, 2),
                                       name='max_pool_3')  # 8
