@@ -56,6 +56,10 @@ pb/*
 tfrecord/*
 !tfrecord/.keep
 
+# tflite
+tflite/*
+!tflite/.keep
+
 # day13 output
 13/img/*
 !13/img/.keep
